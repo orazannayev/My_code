@@ -20,7 +20,7 @@ function DocumentForm({ addDocument }) {
       className="bg-white p-6 shadow-lg rounded-lg border border-gray-200 mb-6"
     >
       <h3 className="text-xl font-semibold text-gray-800 mb-4">
-        Taze dokumentleri gosmak
+        Taze dokument gosmak
       </h3>
       <input
         type="text"
