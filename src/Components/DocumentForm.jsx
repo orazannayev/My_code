@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 
 function DocumentForm({ addDocument }) {
-  const [title, setTitle] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const [type, setType] = useState("passport");
-  const [titlef,tutle] = useState("")
+  const [title, setTitle] = useState(""); //Dokumentiň adyny
+  const [dueDate, setDueDate] = useState(""); //Dokumentiň möhlet senesini yzarlamak üçin.
+  const [type, setType] = useState("passport"); //Dokumentiň görnüşini (meselem, pasport, iş şertnamasy ýa-da saglyk şahadatnamasy) yzarlamak üçin.
 
   const handleSubmit = (e) => {
+    //Bu funksiýa formanyň adaty ugradylma hereketini saklaýar we häzirki ýagdaý zatlary (ýagny title, dueDate, type, titlef) bilen addDocument funksiýasyny çagyrýar.
     e.preventDefault();
-    addDocument({ title, dueDate, type,titlef });
+    addDocument({ title, dueDate, type }); //çagyrylandan soň, forma meýdançalary başky gymmatlaryna yzyna goýulýar.
     setTitle("");
     setDueDate("");
     setType("passport");
-    tutle("");
   };
 
   return (
-    <form
+    <form //bu yerde eyyam form acyp onun icine input berdim
       onSubmit={handleSubmit}
       className="bg-white p-6 shadow-lg rounded-lg border border-gray-200 mb-6"
     >

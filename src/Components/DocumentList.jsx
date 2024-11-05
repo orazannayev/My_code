@@ -8,18 +8,24 @@ function DocumentList({ documents }) {
         Dokumentlerin sanawy
       </h2>
       <ul>
-        {documents.map((doc, index) => (
-          <li
-            key={index}
-            className="flex justify-between p-3 border-b border-gray-100 hover:bg-gray-50 transition duration-200"
-          >
-            <div className="font-medium text-gray-700">
-              <strong>{doc.title}</strong> — {doc.type}
-              <strong>{doc.titlef}</strong> — {doc.type}
-            </div>
-            <DocumentStatus dueDate={doc.dueDate} />
-          </li>
-        ))}
+        {documents.map(
+          // //bu props arkaly geçirilýän dokumentleriň sanawydyr.
+          (
+            doc, //her bir dokumentiň maglumatlaryny öz içine alýar (meselem, title, type, titlef we dueDate).
+            index //her bir dokumentiň sanawdaky indeksini görkezýär we bu key hökmünde ulanylýar.
+          ) => (
+            <li
+              key={index} //Her bir elemente aýratynlyk bermek üçin key attributy ulanylýar.
+              className="flex justify-between p-3 border-b border-gray-100 hover:bg-gray-50 transition duration-200"
+            >
+              <div className="font-medium text-gray-700">
+                <strong>{doc.title}</strong> — {doc.type}
+                <strong>{doc.titlef}</strong> — {doc.type}
+              </div>
+              <DocumentStatus dueDate={doc.dueDate} />
+            </li>
+          )
+        )}
       </ul>
     </div>
   );
