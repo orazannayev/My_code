@@ -3,6 +3,7 @@ import DocumentForm from "./Components/DocumentForm";
 import DocumentList from "./Components/DocumentList";
 import ReportPage from "./Components/ReportPage";
 import Header from "./Components/Header";
+import Example from "./Components/example";
 
 function App() {
   const [documents, setDocuments] = useState([]);
@@ -14,10 +15,10 @@ function App() {
   return (
     <div className="container mx-auto p-6">
       <Header />
-
       <DocumentForm addDocument={addDocument} />
       <DocumentList documents={documents} />
       <ReportPage documents={documents} />
+      <Example />
     </div>
   );
 }

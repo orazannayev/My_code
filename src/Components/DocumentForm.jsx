@@ -1,59 +1,57 @@
 import React, { useState } from "react";
 
-function DocumentForm({ addDocument }) {
-  const [title, setTitle] = useState(""); //Dokumentiň adyny
-  const [dueDate, setDueDate] = useState(""); //Dokumentiň möhlet senesini yzarlamak üçin.
-  const [type, setType] = useState("passport"); //Dokumentiň görnüşini (meselem, pasport, iş şertnamasy ýa-da saglyk şahadatnamasy) yzarlamak üçin.
+function AddInfo() {
+  const [title, setTitle] = useState("");
+  const [dateTime, setDateTime] = useState("");
+  const [option, setOption] = useState("");
+  const [list, setList] = useState([]);
+  const [seen, setSeen] = useState(false);
 
-  const handleSubmit = (e) => {
-    //Bu funksiýa formanyň adaty ugradylma hereketini saklaýar we häzirki ýagdaý zatlary (ýagny title, dueDate, type, titlef) bilen addDocument funksiýasyny çagyrýar.
-    e.preventDefault();
-    addDocument({ title, dueDate, type }); //çagyrylandan soň, forma meýdançalary başky gymmatlaryna yzyna goýulýar.
-    setTitle("");
-    setDueDate("");
-    setType("passport");
+  const addInfo = () => {
+    if (title && dateTime && option) {
+      const newItem = { title, dateTime, option };
+      setList([...list, newItem]);
+      setSeen(true);
+    }
   };
 
   return (
-    <form //bu yerde eyyam form acyp onun icine input berdim
-      onSubmit={handleSubmit}
-      className="bg-white p-6 shadow-lg rounded-lg border border-gray-200 mb-6"
-    >
-      <h3 className="text-xl font-semibold text-gray-800 mb-4">
-        Taze dokument gosmak
-      </h3>
+    <div>
+      <h1>Add info</h1>
       <input
         type="text"
-        placeholder="Ady"
+        placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="border p-3 rounded-lg w-full mb-3 focus:outline-none focus:border-blue-500"
-        required
       />
       <input
         type="date"
-        value={dueDate}
-        onChange={(e) => setDueDate(e.target.value)}
-        className="border p-3 rounded-lg w-full mb-3 focus:outline-none focus:border-blue-500"
-        required
+        value={dateTime}
+        onChange={(e) => setDateTime(e.target.value)}
       />
-      <select
-        value={type}
-        onChange={(e) => setType(e.target.value)}
-        className="border p-3 rounded-lg w-full mb-4 focus:outline-none focus:border-blue-500"
-      >
-        <option value="passport">Pasport</option>
-        <option value="contract">Trudovoy</option>
-        <option value="health_certificate">Saglyk sahadatnama</option>
+      <select value={option} onChange={(e) => setOption(e.target.value)}>
+        <option value="">Select Option</option>
+        <option value="Option 1">Option 1</option>
+        <option value="Option 2">Option 2</option>
+        <option value="Option 3">Option 3</option>
       </select>
-      <button
-        type="submit"
-        className="bg-blue-600 text-white p-3 rounded-lg w-full hover:bg-blue-700 transition duration-300"
-      >
-        Dokumenti Gosmak
-      </button>
-    </form>
+      <button onClick={addInfo}>Add to List</button>
+      <div>
+        <h2>Information</h2>
+        {seen ? (
+          <ul>
+            {list.map((item) => (
+              <li>
+                <strong>{item.title}</strong> - {item.dateTime} - {item.option}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No information.</p>
+        )}
+      </div>
+    </div>
   );
 }
 
-export default DocumentForm;
+export default AddInfo;

@@ -11,23 +11,22 @@ const Sidebar = ({ children }) => {
     <div className="flex">
       <div className="fixed w-20 h-screen p-4 bg-white border-r-[1px] flex-col justify-between ">
         <div className="flex flex-col items-center">
-        <div 
-            href="/DocumentForm"
+          <div
             className="bg-blue-800 text-white p-3 rounded-lg inline-block"
+            href="/documenForm"
           >
-            <FcDataRecovery
-              size={20}
-              className="cursor-pointer"
-              href="./Components/DocumentList"
-              
-            />
+            <a href="/documentForm">
+              <FcDataRecovery size={20} className="cursor-pointer" />
+            </a>
           </div>
           <span className="border-b-[1px] border-gray-200 w-full p-2 "></span>
           <div
             href="/DocumentList"
             className="bg-blue-100  cursor-pointer my-4 text-white p-3 rounded-lg inline-block hover:bg-gray-200"
           >
-            <FcAcceptDatabase size={20} className="cursor-pointer" href="/" />
+            <a href="/DocumentList">
+              <FcAcceptDatabase size={20} className="cursor-pointer" href="/" />
+            </a>
           </div>
           <div className="bg-blue-100  cursor-pointer my-4 text-white p-3 rounded-lg inline-block hover:bg-gray-200">
             <FcDeleteDatabase size={20} className="cursor-pointer" href="/" />
