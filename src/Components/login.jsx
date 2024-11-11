@@ -1,68 +1,66 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-
+import React, { useState } from "react";
+import { useAuth } from "./AuthContext.jsx"; // Import the useAuth hook
 
 function Login() {
-  const navigate = useNavigate();
+  const { login, loading, isAuthenticated } = useAuth(); // Use context values
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const gotToDocumentForm = () => {
-    navigate("/document-form");
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Prevent the default form submission
+
+    const success = await login(username, password); // Call the login function from context
+
+    if (!success) {
+      setError("Giriş şowsuz boldy, parolyňyzy ýa-da adyňyzy barlaň.");
+    }
+  };
+
+  if (isAuthenticated) {
+    // Optionally, you can redirect or show a message that the user is logged in
+    return <div>Giriş udaşykly tamamlandy!</div>;
   }
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-teal-400">
+    <div className="flex items-center justify-center min-h-screen">
       <div className="w-full max-w-lg p-8 space-y-8 bg-white rounded-3xl shadow-2xl transform transition-all duration-500 hover:scale-105">
         <h2 className="text-4xl font-extrabold text-center text-gray-800 tracking-wide">
-          Ppoctanyza giriň
+          Poctanyza girin
         </h2>
-        <form className="space-y-6" action="/login" method="POST">
-          <div>
-            <label className="block text-lg font-medium text-gray-700">
-              Ulanyjy ady ýa-da e-poçta
-            </label>
-            <input
-              type="text"
-              placeholder="Adynyzy ya-da e-mail yazyn"
-              className="w-full p-4 mt-2 text-lg bg-gray-100 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-lg font-medium text-gray-700">
-              Parol
-            </label>
-            <input
-              type="password"
-              placeholder="Passwordynyzy yazyn"
-              className="w-full p-4 mt-2 text-lg bg-gray-100 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all"
-              required
-            />
-          </div>
-          <div className="flex items-center justify-between text-sm text-gray-600">
-            <div>
-              <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  className="form-checkbox text-teal-500"
-                />
-                <span className="ml-2">Meni yatda sakla</span>
-              </label>
-            </div>
-            <a href="#" className="hover:text-teal-500">
-              Paroly yatdan cykardynyzmy?
-            </a>
-          </div>
+        {error && (
+          <p className="text-red-500 text-center">{error}</p> // Display error message
+        )}
+        <form onSubmit={handleLogin} className="space-y-6">
+          <label className="block text-lg font-medium text-gray-700">
+            Ulanyjynyn ady
+          </label>
+          <input
+            className="w-full p-4 mt-2 text-lg bg-gray-100 border-2 border-gray-300 rounded-xl  transition-all"
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <label className="block text-lg font-medium text-gray-700">
+            Passwordynyzy girizin
+          </label>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-4 mt-2 text-lg bg-gray-100 border-2 border-gray-300 rounded-xl  transition-all"
+          />
+
           <button
-            onClick={gotToDocumentForm}
-            className="w-full py-3 font-semibold text-white bg-teal-500 rounded-xl hover:bg-teal-600 transition-all focus:outline-none focus:ring-4 focus:ring-teal-500"
+            type="submit"
+            className="w-full p-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            disabled={loading} // Disable the button while loading
           >
-            Girmek
+            {loading ? "Yüklenýär..." : "Login"}{" "}
+            {/* Button text based on loading state */}
           </button>
-          <div className="text-center text-sm text-gray-500">
-            <span>Poctanyz ýokmy? | </span>
-            <a href="#" className="text-teal-500 hover:underline">
-              Akkaundy doretmek
-            </a>
-          </div>
         </form>
       </div>
     </div>

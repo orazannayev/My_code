@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+  import React, { useState } from "react";
 
 function AddInfo() {
   const [title, setTitle] = useState("");
@@ -14,10 +14,9 @@ function AddInfo() {
       setSeen(true);
     }
   };
-
   return (
     <div>
-      <h1>Add info</h1>
+      <h1 className="text-blue-300  font-bold">Add info</h1>
       <input
         type="text"
         placeholder="Title"
@@ -31,16 +30,16 @@ function AddInfo() {
       />
       <select value={option} onChange={(e) => setOption(e.target.value)}>
         <option value="">Select Option</option>
-        <option value="Option 1">Option 1</option>
+        <option value="Option 1">Passport</option>
         <option value="Option 2">Option 2</option>
-        <option value="Option 3">Option 3</option>
+        <option  value="Option 3">Option 3</option>
       </select>
       <button onClick={addInfo}>Add to List</button>
       <div>
         <h2>Information</h2>
         {seen ? (
           <ul>
-            {list.map((item) => (
+            {list.map((item) => ( 
               <li>
                 <strong>{item.title}</strong> - {item.dateTime} - {item.option}
               </li>
